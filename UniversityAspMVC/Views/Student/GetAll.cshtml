@@ -1,0 +1,65 @@
+﻿@model System.Linq.IQueryable<BL.StudentViewModel>
+
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+<h2>Students</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+    <tr>
+        @* <th> *@
+        @*     @Html.DisplayNameFor(model => model.) *@
+        @* </th> *@
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+            <td>
+                <button type="button" class="btn btn-primary" data-toggle="modal" asp-route-id="@item.Id" data-target="#detailsStudentModal">
+                    Details
+                </button>
+                <button id="btn1" type="button" asp-controller="Student" asp-action="Details" value="1" data-toggle="modal" data-target="#detailsStudentModal">Get Student Details</button>
+            </td>
+        </tr>
+        
+        <div class="modal fade" id="detailsStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">@item.FirstName @item.LastName</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Modal body text goes here.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    </tbody>
+</table>
+
+

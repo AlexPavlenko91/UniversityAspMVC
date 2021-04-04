@@ -1,0 +1,29 @@
+﻿@page
+@model WebApp.Views.Home.Index
+
+@{
+    Layout = "_Layout";
+}
+<div class="container " style="background: #20c997; text-align: center; padding: 10px; border-radius: 7px; ">
+    <div class="row">
+        <div class="col-md-auto">
+            <div id="logo1">
+                <img src="/images/tree2.gif" id="treeGif" alt="" onmouseover="resetAnimation();">
+            </div>
+        </div>
+        <div class="col-md-auto">
+            <h2>Innovating Ecology University</h2>
+        </div>
+    </div>
+</div>
+@* <div class="container" style="justify-content: center; border-radius: 7px; "> *@
+@*      *@
+@* </div> *@
+
+<script>
+// hack for not caching .gifs in ff/chrome etc.
+let resetAnimation = function resetAnimation() {
+  let treeGif = document.getElementById("treeGif");
+  treeGif.src = treeGif.src;
+};
+</script>

@@ -1,0 +1,25 @@
+﻿@using Repositories
+@inject IFacultyRepository _faculties;
+@model Entities.Faculty
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th>
+            Name
+        </th>
+    </tr>
+    </thead>
+    @foreach (var faculty in _faculties.AllItems)
+    {
+        <tr>
+            <td>
+                @faculty.Name
+            </td>
+        </tr>
+    }
+</table>
