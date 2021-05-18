@@ -39,12 +39,14 @@ namespace WebApp.Controllers
             return Redirect("GetAll");
         }
 
-        public IActionResult Edit(Guid? Id)
+        public IActionResult Edit(StudentViewModel model)
         {
-            if (Id.HasValue)
+            if (model!=null)
             {
-                
-                return View(StudentViewModel.GetStudentById(_repository, Id.Value));
+                if (_repository.ChangeItemAsync(model) != null)
+                {
+                    return Redirect("GetAll");
+                }
             } return NotFound(); 
         }
 
@@ -56,9 +58,6 @@ namespace WebApp.Controllers
             } return NotFound(); 
         }
 
-        public IActionResult Details(Guid Id)
-        {
-            return View(StudentViewModel.GetStudentById(_repository, Id));
-        }
+      
     }
 }

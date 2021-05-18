@@ -28,14 +28,14 @@ namespace BL
 
         public static IQueryable<StudentViewModel> GetStudents(IStudentRepository repository)
         {
-            return (repository.AllItems as DbSet<Student>)
+            return (repository.AllItems as DbSet<Student>)!
                 .Include(item => item.Group)
                 .Select(item => new StudentViewModel(item));
         }
 
         public static StudentViewModel GetStudentById(IStudentRepository repository, Guid id)
         {
-            return (repository.AllItems as DbSet<Student>)
+            return (repository.AllItems as DbSet<Student>)!
                 .Where(item => item.Id == id)
                 .Include(item => item.Group)
                 .Select(item => new StudentViewModel(item))

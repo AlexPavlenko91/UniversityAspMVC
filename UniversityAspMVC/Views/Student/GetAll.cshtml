@@ -27,33 +27,45 @@
             </td>
             
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                @*<a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |*@
                 <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
             </td>
             <td>
-                <button type="button" class="btn btn-primary" data-toggle="modal" asp-route-id="@item.Id" data-target="#detailsStudentModal">
-                    Details
-                </button>
-                <button id="btn1" type="button" asp-controller="Student" asp-action="Details" value="1" data-toggle="modal" data-target="#detailsStudentModal">Get Student Details</button>
+               <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                                   Edit
+                               </button>
             </td>
         </tr>
         
-        <div class="modal fade" id="detailsStudentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">@item.FirstName @item.LastName</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Editing student</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p>Modal body text goes here.</p>
+                        <form asp-action="Edit" method="post" id="editStudent"
+                              name="editStudent">
+                            <div class="form-group">
+                                <label for="firstName" class="col-form-label">First name:</label>
+                                <input type="text" class="form-control" name="firstName" id="firstName"
+                                       value="@item.FirstName" required>
+                                <label for="firstName" class="col-form-label">Last name:</label>
+                                <input type="text" class="form-control" name="lastName" id="lastName"
+                                       value="@item.LastName" required>
+                            </div>
+                            <input type="hidden" name="Id" value="@item.Id"/>
+                            <input type="hidden" name="GroupId" value="@item.GroupId"/>
+                            <input type="hidden" name="GroupName" value="@item.GroupName"/>
+                        </form>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Save changes</button>
+                        <button type="submit" onclick="form_submit() " class="btn btn-primary">Save</button>
                     </div>
                 </div>
             </div>
@@ -61,5 +73,16 @@
     }
     </tbody>
 </table>
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        //let button = $(event.relatedTarget) // Button that triggered the modal
+        //let recipient = button.data('whatever') // Extract info from data-* attributes
+        // let modal = $(this)
+    });
+
+    function form_submit() {
+        document.getElementById("editStudent").submit();
+    }
+</script>
 
 
